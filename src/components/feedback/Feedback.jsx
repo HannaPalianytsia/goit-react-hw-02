@@ -1,4 +1,8 @@
-const Feedback = ({ totalFeedback, opinions: { good, neutral, bad } }) => {
+const Feedback = ({
+  totalFeedback,
+  opinions: { good, neutral, bad },
+  positive,
+}) => {
   return (
     <ul>
       <li>
@@ -19,7 +23,7 @@ const Feedback = ({ totalFeedback, opinions: { good, neutral, bad } }) => {
       </li>
       <li>
         <span>Positive: </span>
-        <span>{Math.round(((good + neutral) / totalFeedback) * 100)}</span>
+        <span>{positive}</span>
       </li>
     </ul>
   );

@@ -5,7 +5,6 @@ import Description from "./components/description/Description";
 import Feedback from "./components/feedback/Feedback";
 import Options from "./components/options/Options";
 import Notification from "./components/notification/Notification";
-import Reset from "./components/reset/Reset";
 
 function App() {
   const [opinions, setOpinions] = useState(() => {
@@ -41,16 +40,24 @@ function App() {
     });
   };
   const totalFeedback = opinions.good + opinions.neutral + opinions.bad;
+  const positive = Math.round(
+    ((opinions.good + opinions.neutral) / totalFeedback) * 100
+  );
 
   return (
     <>
       <Description />
-      <Options updateFeedback={updateFeedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        resetFeedback={resetFeedback}
+        totalFeedback={totalFeedback}
+      />
       {totalFeedback > 0 && (
-        <>
-          <Feedback opinions={opinions} totalFeedback={totalFeedback} />
-          <Reset resetFeedback={resetFeedback} />
-        </>
+        <Feedback
+          opinions={opinions}
+          totalFeedback={totalFeedback}
+          positive={positive}
+        />
       )}
       {totalFeedback === 0 && <Notification />}
     </>
